@@ -1,52 +1,2868 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Food Menu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f8f8f8;
-      max-width: 600px;
-      margin: auto;
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    .menu-section {
-      margin: 20px 0;
-    }
-    .item {
-      margin: 10px 0;
-      padding: 8px;
-      background-color: #ffffff;
-      border-radius: 5px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
-  <h1>Welcome to Our Food Menu</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spice Garden - Authentic South Indian Restaurant</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-  <div class="menu-section">
-    <h2>🍔 Burgers</h2>
-    <div class="item">Classic Beef Burger - ₹150</div>
-    <div class="item">Veggie Burger - ₹120</div>
-  </div>
+      body {
+        font-family: "Georgia", serif;
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        color: #333;
+        line-height: 1.6;
+      }
 
-  <div class="menu-section">
-    <h2>🍕 Pizzas</h2>
-    <div class="item">Margherita - ₹200</div>
-    <div class="item">Pepperoni - ₹250</div>
-  </div>
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 
-  <div class="menu-section">
-    <h2>🥤 Drinks</h2>
-    <div class="item">Coke - ₹50</div>
-    <div class="item">Lemonade - ₹60</div>
-  </div>
-</body>
+      header {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .restaurant-name {
+        font-size: 3em;
+        color: #d32f2f;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .tagline {
+        font-size: 1.2em;
+        color: #666;
+        font-style: italic;
+      }
+
+      .menu-section {
+        background: rgba(255, 255, 255, 0.95);
+        margin-bottom: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .section-header {
+        background: #d32f2f;
+        color: white;
+        padding: 20px;
+        font-size: 1.8em;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 20px;
+        padding: 30px;
+      }
+
+      .menu-item {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+      }
+
+      .menu-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 8px;
+      }
+
+      .item-name {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #d32f2f;
+        flex: 1;
+      }
+
+      .item-price {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #f7931e;
+        margin-left: 10px;
+      }
+
+      .item-description {
+        color: #666;
+        font-size: 0.95em;
+        font-style: italic;
+        margin-top: 5px;
+      }
+
+      .spicy-indicator {
+        color: #ff4444;
+        font-weight: bold;
+      }
+
+      .veg-indicator {
+        color: #4caf50;
+        font-weight: bold;
+      }
+
+      footer {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .contact-info {
+        color: #666;
+        font-size: 1.1em;
+      }
+
+      .language-selector {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 10px 15px;
+        border-radius: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border: 2px solid #d32f2f;
+      }
+
+      .language-selector select {
+        background: transparent;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        color: #d32f2f;
+        cursor: pointer;
+        outline: none;
+        padding: 5px;
+      }
+
+      .language-selector select option {
+        background: white;
+        color: #333;
+        padding: 5px;
+      }
+
+      .lang-content {
+        display: none;
+      }
+
+      .lang-content.active {
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .menu-grid {
+          grid-template-columns: 1fr;
+          padding: 20px;
+        }
+
+        .restaurant-name {
+          font-size: 2em;
+        }
+
+        .container {
+          padding: 10px;
+        }
+
+        .language-selector {
+          position: static;
+          margin-bottom: 20px;
+          text-align: center;
+          width: fit-content;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+      <select id="languageSelect" onchange="changeLanguage()">
+        <option value="en">🇬🇧 English</option>
+        <option value="hi">🇮🇳 हिंदी</option>
+        <option value="ta">🇮🇳 தமிழ்</option>
+        <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+        <option value="te">🇮🇳 తెలుగు</option>
+      </select>
+    </div>
+
+    <div class="container">
+      <!-- English Content -->
+      <div id="content-en" class="lang-content active">
+        <header>
+          <h1 class="restaurant-name">🌶️ Spice Garden 🌶️</h1>
+          <p class="tagline">Authentic South Indian Delicacies Since 1985</p>
+        </header>
+
+        <div class="menu-section">
+          <div class="section-header">🥞 DOSA & UTTAPAM</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Plain Dosa</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  Crispy rice and lentil crepe served with coconut chutney and
+                  sambar
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Masala Dosa</span
+                  >
+                  <span class="item-price">₹150</span>
+                </div>
+                <div class="item-description">
+                  Golden dosa filled with spiced potato curry
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Rava Dosa</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  Crispy semolina crepe with onions and green chilies
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Mysore Masala
+                    Dosa</span
+                  >
+                  <span class="item-price">₹170</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> Spicy red chutney dosa
+                  with potato filling
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Onion Uttapam</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  Thick pancake topped with fresh onions
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Vegetable
+                    Uttapam</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  Mixed vegetable uttapam with tomatoes, onions, and peppers
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Cheese Dosa</span
+                  >
+                  <span class="item-price">₹200</span>
+                </div>
+                <div class="item-description">
+                  Dosa filled with melted cheese and vegetables
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Paper Dosa</span
+                  >
+                  <span class="item-price">₹180</span>
+                </div>
+                <div class="item-description">
+                  Extra large and crispy thin dosa
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍛 IDLI & VADA</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Idli (2 pieces)</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  Soft steamed rice cakes served with chutney and sambar
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Medu Vada (2
+                    pieces)</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  Crispy lentil donuts with coconut chutney
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Idli Vada Combo</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  2 idli + 1 vada with chutneys and sambar
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Rava Idli (2
+                    pieces)</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  Semolina steamed cakes with curry leaves and mustard seeds
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Sambar Vada</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  Vada soaked in hot sambar with vegetables
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Dahi Vada</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  Vada in seasoned yogurt with mint and tamarind chutney
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍚 RICE SPECIALTIES</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Sambar Rice</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  Steamed rice mixed with tangy lentil curry
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Curd Rice</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  Rice mixed with yogurt, curry leaves, and mustard seeds
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Lemon Rice</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  Tangy rice with turmeric, peanuts, and curry leaves
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Coconut Rice</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  Fragrant rice with fresh coconut and spices
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Bisi Bele Bath</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> Spicy rice and lentil
+                  dish with vegetables
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Tamarind Rice</span
+                  >
+                  <span class="item-price">₹125</span>
+                </div>
+                <div class="item-description">
+                  Tangy rice with tamarind paste and peanuts
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 Chicken Biryani</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  Aromatic basmati rice with tender chicken and spices
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 Mutton Biryani</span>
+                  <span class="item-price">₹320</span>
+                </div>
+                <div class="item-description">
+                  Rich mutton biryani with saffron and fried onions
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥘 CURRIES & GRAVIES</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Dal Tadka</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  Yellow lentils tempered with cumin and garlic
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Sambar</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  Traditional lentil curry with vegetables and tamarind
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Rasam</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  Tangy tomato and tamarind soup with spices
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Avial</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  Mixed vegetables in coconut and yogurt gravy
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 Chicken Curry</span>
+                  <span class="item-price">₹220</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> Spicy chicken in
+                  coconut-based gravy
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 Fish Curry</span>
+                  <span class="item-price">₹250</span>
+                </div>
+                <div class="item-description">
+                  Fresh fish in tangy coconut curry
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 Mutton Curry</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️🌶️</span> Rich and spicy
+                  mutton in traditional gravy
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 Prawn Curry</span>
+                  <span class="item-price">₹270</span>
+                </div>
+                <div class="item-description">
+                  Succulent prawns in coconut milk curry
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥤 BEVERAGES</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Filter Coffee</span
+                  >
+                  <span class="item-price">₹60</span>
+                </div>
+                <div class="item-description">
+                  Traditional South Indian coffee with milk and sugar
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Masala Chai</span
+                  >
+                  <span class="item-price">₹40</span>
+                </div>
+                <div class="item-description">
+                  Spiced tea with cardamom, ginger, and cinnamon
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Fresh Lime
+                    Water</span
+                  >
+                  <span class="item-price">₹50</span>
+                </div>
+                <div class="item-description">
+                  Refreshing lime juice with mint
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Buttermilk</span
+                  >
+                  <span class="item-price">₹45</span>
+                </div>
+                <div class="item-description">
+                  Seasoned yogurt drink with curry leaves
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Tender Coconut</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  Fresh coconut water straight from the shell
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Mango Lassi</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">Sweet mango yogurt drink</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍰 DESSERTS</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Payasam</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  Traditional rice pudding with cardamom and nuts
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Mysore Pak</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  Rich ghee-based sweet with gram flour
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Rava Kesari</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  Semolina pudding with saffron and cashews
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> Gulab Jamun</span
+                  >
+                  <span class="item-price">₹85</span>
+                </div>
+                <div class="item-description">
+                  Soft milk dumplings in rose-flavored syrup
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="contact-info">
+            <p>
+              <strong>📍 Address:</strong> 123 Temple Street, Gandhi Nagar,
+              Bangalore - 560001
+            </p>
+            <p>
+              <strong>📞 Phone:</strong> +91 98765 43210 |
+              <strong>📧 Email:</strong> info@spicegarden.com
+            </p>
+            <p>
+              <strong>🕒 Timing:</strong> 7:00 AM - 11:00 PM |
+              <strong>🚗 Free Home Delivery</strong>
+            </p>
+            <p style="margin-top: 15px; font-style: italic">
+              🟢 Vegetarian | 🔴 Non-Vegetarian | 🌶️ Spice Level
+            </p>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Hindi Content -->
+      <div id="content-hi" class="lang-content">
+        <header>
+          <h1 class="restaurant-name">🌶️ स्पाइस गार्डन 🌶️</h1>
+          <p class="tagline">1985 से प्रामाणिक दक्षिण भारतीय व्यंजन</p>
+        </header>
+
+        <div class="menu-section">
+          <div class="section-header">🥞 डोसा और उत्तपम</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> प्लेन डोसा</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  कुरकुरा चावल और दाल का क्रेप नारियल चटनी और सांबर के साथ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> मसाला डोसा</span
+                  >
+                  <span class="item-price">₹150</span>
+                </div>
+                <div class="item-description">
+                  मसालेदार आलू करी से भरा गोल्डन डोसा
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> रवा डोसा</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  प्याज और हरी मिर्च के साथ कुरकुरा सूजी क्रेप
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> मैसूर मसाला
+                    डोसा</span
+                  >
+                  <span class="item-price">₹170</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> आलू भरावन के साथ
+                  मसालेदार लाल चटनी डोसा
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> प्याज उत्तपम</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  ताजे प्याज के साथ मोटा पैनकेक
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> सब्जी उत्तपम</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  टमाटर, प्याज और शिमला मिर्च के साथ मिश्रित सब्जी उत्तपम
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> चीज़ डोसा</span
+                  >
+                  <span class="item-price">₹200</span>
+                </div>
+                <div class="item-description">
+                  पिघले हुए चीज़ और सब्जियों से भरा डोसा
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> पेपर डोसा</span
+                  >
+                  <span class="item-price">₹180</span>
+                </div>
+                <div class="item-description">
+                  अतिरिक्त बड़ा और कुरकुरा पतला डोसा
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍛 इडली और वड़ा</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> इडली (2 पीस)</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  नरम भाप के चावल के केक चटनी और सांबर के साथ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> मेदु वड़ा (2
+                    पीस)</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  नारियल चटनी के साथ कुरकुरे दाल के डोनट्स
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> इडली वड़ा
+                    कॉम्बो</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  2 इडली + 1 वड़ा चटनी और सांबर के साथ
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> रवा इडली (2
+                    पीस)</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  करी पत्ता और सरसों के बीज के साथ सूजी के भाप केक
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> सांबर वड़ा</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  सब्जियों के साथ गर्म सांबर में भिगोया हुआ वड़ा
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> दही वड़ा</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  पुदीना और इमली की चटनी के साथ मसालेदार दही में वड़ा
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍚 चावल की विशेषताएं</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> सांबर चावल</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  तीखी दाल की करी के साथ मिले हुए भाप चावल
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> दही चावल</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  दही, करी पत्ता और सरसों के बीज के साथ मिले चावल
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> नींबू चावल</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  हल्दी, मूंगफली और करी पत्ता के साथ तीखे चावल
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> नारियल चावल</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  ताजे नारियल और मसालों के साथ खुशबूदार चावल
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> बिसी बेले बाथ</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> सब्जियों के साथ
+                  मसालेदार चावल और दाल का व्यंजन
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> इमली चावल</span
+                  >
+                  <span class="item-price">₹125</span>
+                </div>
+                <div class="item-description">
+                  इमली के पेस्ट और मूंगफली के साथ तीखे चावल
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 चिकन बिरयानी</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  नरम चिकन और मसालों के साथ खुशबूदार बासमती चावल
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 मटन बिरयानी</span>
+                  <span class="item-price">₹320</span>
+                </div>
+                <div class="item-description">
+                  केसर और तली हुई प्याज के साथ समृद्ध मटन बिरयानी
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥘 करी और ग्रेवी</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> दाल तड़का</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  जीरा और लहसुन के साथ तड़का लगी पीली दाल
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> सांबर</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  सब्जियों और इमली के साथ पारंपरिक दाल करी
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> रसम</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  मसालों के साथ तीखा टमाटर और इमली का सूप
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> अवियल</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  नारियल और दही की ग्रेवी में मिश्रित सब्जियां
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 चिकन करी</span>
+                  <span class="item-price">₹220</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> नारियल आधारित ग्रेवी
+                  में मसालेदार चिकन
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 फिश करी</span>
+                  <span class="item-price">₹250</span>
+                </div>
+                <div class="item-description">
+                  तीखी नारियल करी में ताजी मछली
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 मटन करी</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️🌶️</span> पारंपरिक ग्रेवी में
+                  समृद्ध और मसालेदार मटन
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 झींगा करी</span>
+                  <span class="item-price">₹270</span>
+                </div>
+                <div class="item-description">
+                  नारियल के दूध की करी में रसीले झींगे
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥤 पेय पदार्थ</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> फिल्टर कॉफी</span
+                  >
+                  <span class="item-price">₹60</span>
+                </div>
+                <div class="item-description">
+                  दूध और चीनी के साथ पारंपरिक दक्षिण भारतीय कॉफी
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> मसाला चाय</span
+                  >
+                  <span class="item-price">₹40</span>
+                </div>
+                <div class="item-description">
+                  इलायची, अदरक और दालचीनी के साथ मसालेदार चाय
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ताजा नींबू पानी</span
+                  >
+                  <span class="item-price">₹50</span>
+                </div>
+                <div class="item-description">
+                  पुदीने के साथ ताज़गी भरा नींबू का रस
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> छाछ</span
+                  >
+                  <span class="item-price">₹45</span>
+                </div>
+                <div class="item-description">
+                  करी पत्ता के साथ मसालेदार दही का पेय
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> हरा नारियल</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">सीधे खोल से ताजा नारियल पानी</div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> आम लस्सी</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">मीठा आम दही का पेय</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍰 मिठाइयां</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> पायसम</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  इलायची और नट्स के साथ पारंपरिक चावल की खीर
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> मैसूर पाक</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  बेसन के साथ समृद्ध घी आधारित मिठाई
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> रवा केसरी</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  केसर और काजू के साथ सूजी की खीर
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> गुलाब जामुन</span
+                  >
+                  <span class="item-price">₹85</span>
+                </div>
+                <div class="item-description">
+                  गुलाब स्वादयुक्त सिरप में नरम दूध के पकौड़े
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="contact-info">
+            <p>
+              <strong>📍 पता:</strong> 123 टेम्पल स्ट्रीट, गांधी नगर, बैंगलोर -
+              560001
+            </p>
+            <p>
+              <strong>📞 फोन:</strong> +91 98765 43210 |
+              <strong>📧 ईमेल:</strong> info@spicegarden.com
+            </p>
+            <p>
+              <strong>🕒 समय:</strong> सुबह 7:00 - रात 11:00 |
+              <strong>🚗 मुफ्त होम डिलीवरी</strong>
+            </p>
+            <p style="margin-top: 15px; font-style: italic">
+              🟢 शाकाहारी | 🔴 मांसाहारी | 🌶️ मसाला स्तर
+            </p>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Tamil Content -->
+      <div id="content-ta" class="lang-content">
+        <header>
+          <h1 class="restaurant-name">🌶️ ஸ்பைஸ் கார்டன் 🌶️</h1>
+          <p class="tagline">1985 முதல் உண்மையான தென்னிந்திய உணவுகள்</p>
+        </header>
+
+        <div class="menu-section">
+          <div class="section-header">🥞 தோசை மற்றும் உத்தப்பம்</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> வெறும் தோசை</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  பருப்பு அரிசி மற்றும் பருப்பு ரவை தேங்காய் சட்னி மற்றும்
+                  சாம்பாருடன்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> மசாலா தோசை</span
+                  >
+                  <span class="item-price">₹150</span>
+                </div>
+                <div class="item-description">
+                  மசாலா உருளைக்கிழங்கு கறியுடன் நிரப்பப்பட்ட தங்க தோசை
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ரவா தோசை</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  வெங்காயம் மற்றும் பச்சை மிளகாய் உடன் கொடிமை ரவை தோசை
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> மைசூர் மசாலா
+                    தோசை</span
+                  >
+                  <span class="item-price">₹170</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> உருளைக்கிழங்கு
+                  நிரப்புதலுடன் காரமான சிவப்பு சட்னி தோசை
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> வெங்காய
+                    உத்தப்பம்</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  புதிய வெங்காயத்துடன் கூடிய தடிமனான பான்கேக்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> காய்கறி
+                    உத்தப்பம்</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  தக்காளி, வெங்காயம் மற்றும் மிளகாய் உடன் கலந்த காய்கறி
+                  உத்தப்பம்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> சீஸ் தோசை</span
+                  >
+                  <span class="item-price">₹200</span>
+                </div>
+                <div class="item-description">
+                  உருகிய சீஸ் மற்றும் காய்கறிகளால் நிரப்பப்பட்ட தோசை
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> பேப்பர் தோசை</span
+                  >
+                  <span class="item-price">₹180</span>
+                </div>
+                <div class="item-description">
+                  மிகவும் பெரிய மற்றும் கொடிமை மெல்லிய தோசை
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍛 இட்லி மற்றும் வடை</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> இட்லி (2
+                    துண்டுகள்)</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  மென்மையான வேகவைத்த அரிசி கேக்குகள் சட்னி மற்றும் சாம்பாருடன்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> மேடு வடை (2
+                    துண்டுகள்)</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  தேங்காய் சட்னியுடன் கொடிமை பருப்பு டோனட்ஸ்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> இட்லி வடை
+                    காம்போ</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  2 இட்லி + 1 வடை சட்னி மற்றும் சாம்பாருடன்
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ரவை இட்லி (2
+                    துண்டுகள்)</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  கறிவேப்பிலை மற்றும் கடுகு விதைகளுடன் ரவை வேகவைத்த கேக்குகள்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> சாம்பார் வடை</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  காய்கறிகளுடன் சூடான சாம்பாரில் ஊறவைக்கப்பட்ட வடை
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> தயிர் வடை</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  புதினா மற்றும் புளி சட்னியுடன் மசாலா தயிரில் வடை
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍚 அரிசி சிறப்புகள்</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> சாம்பார் சாதம்</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  புளிப்பு பருப்பு கறியுடன் கலந்த வேகவைத்த அரிசி
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> தயிர் சாதம்</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  தயிர், கறிவேப்பிலை மற்றும் கடுகு விதைகளுடன் கலந்த அரிசி
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> எலுமிச்சை சாதம்</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  மஞ்சள், வேர்க்கடலை மற்றும் கறிவேப்பிலையுடன் புளிப்பு அரிசி
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> தேங்காய் சாதம்</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  புதிய தேங்காய் மற்றும் மசாலாப்பொருட்களுடன் மணம்வீசும் அரிசி
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> பிசி பேளே பாத்</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> காய்கறிகளுடன் காரமான
+                  அரிசி மற்றும் பருப்பு உணவு
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> புளி சாதம்</span
+                  >
+                  <span class="item-price">₹125</span>
+                </div>
+                <div class="item-description">
+                  புளி பேஸ்ட் மற்றும் வேர்க்கடலையுடன் புளிப்பு அரிசி
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 சிக்கன் பிரியாணி</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  மென்மையான சிக்கன் மற்றும் மசாலாப்பொருட்களுடன் மணம்வீசும்
+                  பாஸ்மதி அரிசி
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 மட்டன் பிரியாணி</span>
+                  <span class="item-price">₹320</span>
+                </div>
+                <div class="item-description">
+                  குங்குமப்பூ மற்றும் வறுத்த வெங்காயத்துடன் செல்வந்த மட்டன்
+                  பிரியாணி
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥘 கறி மற்றும் குழம்பு</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> பருப்பு தட்கா</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  சீரகம் மற்றும் பூண்டுடன் தாளிக்கப்பட்ட மஞ்சள் பருப்பு
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> சாம்பார்</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  காய்கறிகள் மற்றும் புளியுடன் பாரம்பரிய பருப்பு கறி
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ரசம்</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  மசாலாப்பொருட்களுடன் புளிப்பு தக்காளி மற்றும் புளி சூப்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> அவியல்</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  தேங்காய் மற்றும் தயிர் குழம்பில் கலந்த காய்கறிகள்
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 சிக்கன் கறி</span>
+                  <span class="item-price">₹220</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> தேங்காய் அடிப்படையிலான
+                  குழம்பில் காரமான சிக்கன்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 மீன் கறி</span>
+                  <span class="item-price">₹250</span>
+                </div>
+                <div class="item-description">
+                  புளிப்பு தேங்காய் கறியில் புதிய மீன்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 மட்டன் கறி</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️🌶️</span> பாரம்பரிய குழம்பில்
+                  செல்வந்த மற்றும் காரமான மட்டன்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 இறால் கறி</span>
+                  <span class="item-price">₹270</span>
+                </div>
+                <div class="item-description">
+                  தேங்காய் பால் கறியில் சுவையான இறால்
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥤 பானங்கள்</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ஃபில்டர் காபி</span
+                  >
+                  <span class="item-price">₹60</span>
+                </div>
+                <div class="item-description">
+                  பால் மற்றும் சர்க்கரையுடன் பாரம்பரிய தென்னிந்திய காபி
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> மசாலா சாய்</span
+                  >
+                  <span class="item-price">₹40</span>
+                </div>
+                <div class="item-description">
+                  ஏலக்காய், இஞ்சி மற்றும் இலவங்கப்பட்டையுடன் மசாலா தேநீர்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> புதிய எலுமிச்சை
+                    நீர்</span
+                  >
+                  <span class="item-price">₹50</span>
+                </div>
+                <div class="item-description">
+                  புதினாவுடன் புத்துணர்ச்சியூட்டும் எலுமிச்சை சாறு
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> மோர்</span
+                  >
+                  <span class="item-price">₹45</span>
+                </div>
+                <div class="item-description">
+                  கறிவேப்பிலையுடன் மசாலா தயிர் பானம்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> இளநீர்</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  ஓட்டிலிருந்து நேராக புதிய தேங்காய் நீர்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> மாம்பழ லஸ்ஸி</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">இனிப்பு மாம்பழ தயிர் பானம்</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍰 இனிப்புகள்</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> பாயசம்</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  ஏலக்காய் மற்றும் கொட்டைகளுடன் பாரம்பரிய அரிசி புட்டிங்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> மைசூர் பாக்</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  கடலை மாவுடன் செல்வந்த நெய் அடிப்படையிலான இனிப்பு
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ரவை கேசரி</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  குங்குமப்பூ மற்றும் முந்திரியுடன் ரவை புட்டிங்
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> குலாப் ஜாமுன்</span
+                  >
+                  <span class="item-price">₹85</span>
+                </div>
+                <div class="item-description">
+                  ரோஜா சுவையிலான சிரப்பில் மென்மையான பால் பூண்டுகள்
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="contact-info">
+            <p>
+              <strong>📍 முகவரி:</strong> 123 கோயில் தெரு, காந்தி நகர்,
+              பெங்களூர் - 560001
+            </p>
+            <p>
+              <strong>📞 தொலைபேசி:</strong> +91 98765 43210 |
+              <strong>📧 மின்னஞ்சல்:</strong> info@spicegarden.com
+            </p>
+            <p>
+              <strong>🕒 நேரம்:</strong> காலை 7:00 - இரவு 11:00 |
+              <strong>🚗 இலவச வீட்டு விநியோகம்</strong>
+            </p>
+            <p style="margin-top: 15px; font-style: italic">
+              🟢 சைவம் | 🔴 அசைவம் | 🌶️ காரம் நிலை
+            </p>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Kannada Content -->
+      <div id="content-kn" class="lang-content">
+        <header>
+          <h1 class="restaurant-name">🌶️ ಸ್ಪೈಸ್ ಗಾರ್ಡನ್ 🌶️</h1>
+          <p class="tagline">1985 ರಿಂದ ನಿಜವಾದ ದಕ್ಷಿಣ ಭಾರತೀಯ ಭಕ್ಷ್ಯಗಳು</p>
+        </header>
+
+        <div class="menu-section">
+          <div class="section-header">🥞 ದೋಸೆ ಮತ್ತು ಉತ್ತಪ್ಪ</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಸಾದಾ ದೋಸೆ</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  ಕುರುಕುಲಾದ ಅಕ್ಕಿ ಮತ್ತು ಬೇಳೆ ಕ್ರೇಪ್ ತೆಂಗಿನ ಚಟ್ನಿ ಮತ್ತು ಸಾಂಬಾರ್
+                  ಜೊತೆ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಮಸಾಲಾ ದೋಸೆ</span
+                  >
+                  <span class="item-price">₹150</span>
+                </div>
+                <div class="item-description">
+                  ಮಸಾಲೆ ಆಲೂಗಡ್ಡೆ ಕರಿಯಿಂದ ತುಂಬಿದ ಚಿನ್ನದ ದೋಸೆ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ರವಾ ದೋಸೆ</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  ಈರುಳ್ಳಿ ಮತ್ತು ಹಸಿ ಮೆಣಸಿನಕಾಯಿಯೊಂದಿಗೆ ಕುರುಕಾದ ರವೆ ಕ್ರೇಪ್
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಮೈಸೂರು ಮಸಾಲಾ
+                    ದೋಸೆ</span
+                  >
+                  <span class="item-price">₹170</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> ಆಲೂಗಡ್ಡೆ ಭರ್ತಿಯೊಂದಿಗೆ
+                  ಖಾರದ ಕೆಂಪು ಚಟ್ನಿ ದೋಸೆ
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಈರುಳ್ಳಿ ಉತ್ತಪ್ಪ</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  ತಾಜಾ ಈರುಳ್ಳಿಯೊಂದಿಗೆ ದಪ್ಪ ಪ್ಯಾನ್‌ಕೇಕ್
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ತರಕಾರಿ ಉತ್ತಪ್ಪ</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  ಟೊಮೇಟೊ, ಈರುಳ್ಳಿ ಮತ್ತು ಮೆಣಸಿನಕಾಯಿಯೊಂದಿಗೆ ಮಿಶ್ರ ತರಕಾರಿ ಉತ್ತಪ್ಪ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಚೀಸ್ ದೋಸೆ</span
+                  >
+                  <span class="item-price">₹200</span>
+                </div>
+                <div class="item-description">
+                  ಕರಗಿದ ಚೀಸ್ ಮತ್ತು ತರಕಾರಿಗಳಿಂದ ತುಂಬಿದ ದೋಸೆ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಪೇಪರ್ ದೋಸೆ</span
+                  >
+                  <span class="item-price">₹180</span>
+                </div>
+                <div class="item-description">
+                  ಹೆಚ್ಚು ದೊಡ್ಡ ಮತ್ತು ಕುರುಕಾದ ತೆಳುವಾದ ದೋಸೆ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍛 ಇಡ್ಲಿ ಮತ್ತು ವಡೆ</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಇಡ್ಲಿ (2
+                    ತುಂಡುಗಳು)</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  ಮೃದುವಾದ ಆವಿಯಲ್ಲಿ ಬೇಯಿಸಿದ ಅಕ್ಕಿ ಕೇಕ್‌ಗಳು ಚಟ್ನಿ ಮತ್ತು ಸಾಂಬಾರ್
+                  ಜೊತೆ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಮೇಡು ವಡೆ (2
+                    ತುಂಡುಗಳು)</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  ತೆಂಗಿನ ಚಟ್ನಿಯೊಂದಿಗೆ ಕುರುಕಾದ ಬೇಳೆ ಡೊನಟ್‌ಗಳು
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಇಡ್ಲಿ ವಡೆ ಕಾಂಬೋ</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  2 ಇಡ್ಲಿ + 1 ವಡೆ ಚಟ್ನಿ ಮತ್ತು ಸಾಂಬಾರ್ ಜೊತೆ
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ರವಾ ಇಡ್ಲಿ (2
+                    ತುಂಡುಗಳು)</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  ಕರಿಬೇವು ಮತ್ತು ಸಾಸಿವೆ ಬೀಜಗಳೊಂದಿಗೆ ರವೆ ಆವಿಯಲ್ಲಿ ಬೇಯಿಸಿದ ಕೇಕ್‌ಗಳು
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಸಾಂಬಾರ್ ವಡೆ</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  ತರಕಾರಿಗಳೊಂದಿಗೆ ಬಿಸಿ ಸಾಂಬಾರ್‌ನಲ್ಲಿ ನೆನೆಸಿದ ವಡೆ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ದಹಿ ವಡೆ</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  ಪುದೀನ ಮತ್ತು ಹುಣಸೆ ಚಟ್ನಿಯೊಂದಿಗೆ ಮಸಾಲೆ ದಹಿಯಲ್ಲಿ ವಡೆ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍚 ಅಕ್ಕಿ ವಿಶೇಷತೆಗಳು</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಸಾಂಬಾರ್ ಅನ್ನ</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  ಹುಳಿ ಬೇಳೆ ಕರಿಯೊಂದಿಗೆ ಬೆರೆಸಿದ ಆವಿಯಲ್ಲಿ ಬೇಯಿಸಿದ ಅಕ್ಕಿ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಮೊಸರನ್ನ</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  ಮೊಸರು, ಕರಿಬೇವು ಮತ್ತು ಸಾಸಿವೆ ಬೀಜಗಳೊಂದಿಗೆ ಬೆರೆಸಿದ ಅಕ್ಕಿ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ನಿಂಬೆ ಅನ್ನ</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  ಅರಿಶಿನ, ಕಡಲೇಕಾಯಿ ಮತ್ತು ಕರಿಬೇವಿನೊಂದಿಗೆ ಹುಳಿ ಅಕ್ಕಿ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ತೆಂಗಿನ ಅನ್ನ</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  ತಾಜಾ ತೆಂಗಿನಕಾಯಿ ಮತ್ತು ಮಸಾಲೆಗಳೊಂದಿಗೆ ಸುಗಂಧಯುಕ್ತ ಅಕ್ಕಿ
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಬಿಸಿಬೇಳೆ ಬಾತ್</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> ತರಕಾರಿಗಳೊಂದಿಗೆ ಖಾರದ
+                  ಅಕ್ಕಿ ಮತ್ತು ಬೇಳೆ ಖಾದ್ಯ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಹುಣಸೆ ಅನ್ನ</span
+                  >
+                  <span class="item-price">₹125</span>
+                </div>
+                <div class="item-description">
+                  ಹುಣಸೆ ಪೇಸ್ಟ್ ಮತ್ತು ಕಡಲೇಕಾಯಿಯೊಂದಿಗೆ ಹುಳಿ ಅಕ್ಕಿ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 ಚಿಕನ್ ಬಿರಿಯಾನಿ</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  ಮೃದುವಾದ ಚಿಕನ್ ಮತ್ತು ಮಸಾಲೆಗಳೊಂದಿಗೆ ಸುಗಂಧಯುಕ್ತ ಬಾಸ್ಮತಿ ಅಕ್ಕಿ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 ಮಟನ್ ಬಿರಿಯಾನಿ</span>
+                  <span class="item-price">₹320</span>
+                </div>
+                <div class="item-description">
+                  ಕೇಸರಿ ಮತ್ತು ಹುರಿದ ಈರುಳ್ಳಿಯೊಂದಿಗೆ ಶ್ರೀಮಂತ ಮಟನ್ ಬಿರಿಯಾನಿ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥘 ಕರಿ ಮತ್ತು ಗ್ರೇವಿ</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಬೇಳೆ ತಡ್ಕಾ</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  ಜೀರಿಗೆ ಮತ್ತು ಬೆಳ್ಳುಳ್ಳಿಯೊಂದಿಗೆ ತಾಳಿಸಿದ ಹಳದಿ ಬೇಳೆ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಸಾಂಬಾರ್</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  ತರಕಾರಿಗಳು ಮತ್ತು ಹುಣಸೆಯೊಂದಿಗೆ ಸಾಂಪ್ರದಾಯಿಕ ಬೇಳೆ ಕರಿ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ರಸಂ</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  ಮಸಾಲೆಗಳೊಂದಿಗೆ ಹುಳಿ ಟೊಮೇಟೊ ಮತ್ತು ಹುಣಸೆ ಸೂಪ್
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಅವಿಯಲ್</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  ತೆಂಗಿನಕಾಯಿ ಮತ್ತು ಮೊಸರು ಗ್ರೇವಿಯಲ್ಲಿ ಮಿಶ್ರ ತರಕಾರಿಗಳು
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 ಚಿಕನ್ ಕರಿ</span>
+                  <span class="item-price">₹220</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> ತೆಂಗಿನಕಾಯಿ ಆಧಾರಿತ
+                  ಗ್ರೇವಿಯಲ್ಲಿ ಖಾರದ ಚಿಕನ್
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 ಮೀನು ಕರಿ</span>
+                  <span class="item-price">₹250</span>
+                </div>
+                <div class="item-description">
+                  ಹುಳಿ ತೆಂಗಿನಕಾಯಿ ಕರಿಯಲ್ಲಿ ತಾಜಾ ಮೀನು
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 ಮಟನ್ ಕರಿ</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️🌶️</span> ಸಾಂಪ್ರದಾಯಿಕ
+                  ಗ್ರೇವಿಯಲ್ಲಿ ಶ್ರೀಮಂತ ಮತ್ತು ಖಾರದ ಮಟನ್
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 ಸೀಗಡಿ ಕರಿ</span>
+                  <span class="item-price">₹270</span>
+                </div>
+                <div class="item-description">
+                  ತೆಂಗಿನ ಹಾಲಿನ ಕರಿಯಲ್ಲಿ ರಸಭರಿತ ಸೀಗಡಿ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥤 ಪಾನೀಯಗಳು</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಫಿಲ್ಟರ್ ಕಾಫಿ</span
+                  >
+                  <span class="item-price">₹60</span>
+                </div>
+                <div class="item-description">
+                  ಹಾಲು ಮತ್ತು ಸಕ್ಕರೆಯೊಂದಿಗೆ ಸಾಂಪ್ರದಾಯಿಕ ದಕ್ಷಿಣ ಭಾರತೀಯ ಕಾಫಿ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಮಸಾಲಾ ಚಾಯ್</span
+                  >
+                  <span class="item-price">₹40</span>
+                </div>
+                <div class="item-description">
+                  ಏಲಕ್ಕಿ, ಶುಂಠಿ ಮತ್ತು ದಾಲ್ಚಿನ್ನಿಯೊಂದಿಗೆ ಮಸಾಲೆ ಚಹಾ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ತಾಜಾ ನಿಂಬೆ ನೀರು</span
+                  >
+                  <span class="item-price">₹50</span>
+                </div>
+                <div class="item-description">
+                  ಪುದೀನದೊಂದಿಗೆ ಉಲ್ಲಾಸದಾಯಕ ನಿಂಬೆ ರಸ
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಮಜ್ಜಿಗೆ</span
+                  >
+                  <span class="item-price">₹45</span>
+                </div>
+                <div class="item-description">
+                  ಕರಿಬೇವಿನೊಂದಿಗೆ ಮಸಾಲೆ ಮೊಸರು ಪಾನೀಯ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಎಳೆ ತೆಂಗಿನಕಾಯಿ</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  ಚಿಪ್ಪಿನಿಂದ ನೇರವಾಗಿ ತಾಜಾ ತೆಂಗಿನ ನೀರು
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಮಾವಿನ ಲಸ್ಸಿ</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">ಸಿಹಿ ಮಾವಿನ ಮೊಸರು ಪಾನೀಯ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍰 ಸಿಹಿತಿಂಡಿಗಳು</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಪಾಯಸ</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  ಏಲಕ್ಕಿ ಮತ್ತು ಕಾಯಿಗಳೊಂದಿಗೆ ಸಾಂಪ್ರದಾಯಿಕ ಅಕ್ಕಿ ಪುಡಿಂಗ್
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಮೈಸೂರು ಪಾಕ</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  ಕಡಲೆಬೇಳೆಯೊಂದಿಗೆ ಶ್ರೀಮಂತ ತುಪ್ಪ ಆಧಾರಿತ ಸಿಹಿ
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ರವಾ ಕೇಸರಿ</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  ಕೇಸರಿ ಮತ್ತು ಗೋಡಂಬಿಯೊಂದಿಗೆ ರವೆ ಪುಡಿಂಗ್
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ಗುಲಾಬ್ ಜಾಮೂನ್</span
+                  >
+                  <span class="item-price">₹85</span>
+                </div>
+                <div class="item-description">
+                  ಗುಲಾಬಿ ರುಚಿಯ ಸಿರಪ್‌ನಲ್ಲಿ ಮೃದುವಾದ ಹಾಲಿನ ಡಂಪ್ಲಿಂಗ್‌ಗಳು
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="contact-info">
+            <p>
+              <strong>📍 ವಿಳಾಸ:</strong> 123 ದೇವಸ್ಥಾನ ಬೀದಿ, ಗಾಂಧಿ ನಗರ, ಬೆಂಗಳೂರು
+              - 560001
+            </p>
+            <p>
+              <strong>📞 ದೂರವಾಣಿ:</strong> +91 98765 43210 |
+              <strong>📧 ಇಮೇಲ್:</strong> info@spicegarden.com
+            </p>
+            <p>
+              <strong>🕒 ಸಮಯ:</strong> ಬೆಳಿಗ್ಗೆ 7:00 - ರಾತ್ರಿ 11:00 |
+              <strong>🚗 ಉಚಿತ ಮನೆ ವಿತರಣೆ</strong>
+            </p>
+            <p style="margin-top: 15px; font-style: italic">
+              🟢 ಸಸ್ಯಾಹಾರಿ | 🔴 ಮಾಂಸಾಹಾರಿ | 🌶️ ಮಸಾಲೆ ಮಟ್ಟ
+            </p>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Telugu Content -->
+      <div id="content-te" class="lang-content">
+        <header>
+          <h1 class="restaurant-name">🌶️ స్పైస్ గార్డెన్ 🌶️</h1>
+          <p class="tagline">1985 నుండి అసలైన దక్షిణ భారతీయ వంటకాలు</p>
+        </header>
+
+        <div class="menu-section">
+          <div class="section-header">🥞 దోసె మరియు ఉత్తప్పం</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> సాదా దోసె</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  కురుకుకరిగిన అన్నం మరియు పప్పు క్రేప్ కొబ్బరి చట్నీ మరియు
+                  సాంబార్‌తో
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> మసాలా దోసె</span
+                  >
+                  <span class="item-price">₹150</span>
+                </div>
+                <div class="item-description">
+                  మసాలా బంగాళాదుంప కర్రీతో నిండిన బంగారు దోసె
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> రవా దోసె</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  ఉల్లిపాయలు మరియు పచ్చిమిర్చులతో కురుకుగా ఉండే రవా క్రేప్
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> మైసూర్ మసాలా
+                    దోసె</span
+                  >
+                  <span class="item-price">₹170</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> బంగాళాదుంప నింపుతో
+                  కారమైన ఎర్ర చట్నీ దోసె
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ఉల్లిపాయ
+                    ఉత్తప్పం</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  తాజా ఉల్లిపాయలతో మందమైన పాన్‌కేక్
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> కూరగాయల
+                    ఉత్తప్పం</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  టమాటాలు, ఉల్లిపాయలు మరియు మిర్చులతో మిశ్రమ కూరగాయల ఉత్తప్పం
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> చీజ్ దోసె</span
+                  >
+                  <span class="item-price">₹200</span>
+                </div>
+                <div class="item-description">
+                  కరిగిన చీజ్ మరియు కూరగాయలతో నిండిన దోసె
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> పేపర్ దోసె</span
+                  >
+                  <span class="item-price">₹180</span>
+                </div>
+                <div class="item-description">
+                  అధిక పెద్ద మరియు కురుకుగా ఉండే సన్నని దోసె
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍛 ఇడ్లీ మరియు వడ</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ఇడ్లీ (2
+                    ముక్కలు)</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  మృదువైన ఆవిరిలో ఉడికించిన అన్నం కేకులు చట్నీ మరియు సాంబార్‌తో
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> మేడు వడ (2
+                    ముక్కలు)</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  కొబ్బరి చట్నీతో కురుకుగా ఉండే పప్పు డోనట్‌లు
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ఇడ్లీ వడ కాంబో</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  2 ఇడ్లీ + 1 వడ చట్నీలు మరియు సాంబార్‌తో
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> రవా ఇడ్లీ (2
+                    ముక్కలు)</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  కరివేపాకు మరియు ఆవాల గింజలతో రవా ఆవిరిలో ఉడికించిన కేకులు
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> సాంబార్ వడ</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  కూరగాయలతో వేడి సాంబార్‌లో నానబెట్టిన వడ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> దహి వడ</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  పుదీనా మరియు చింతపండు చట్నీతో మసాలా దధిలో వడ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍚 అన్నం ప్రత్యేకతలు</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> సాంబార్ అన్నం</span
+                  >
+                  <span class="item-price">₹140</span>
+                </div>
+                <div class="item-description">
+                  పులుపు పప్పు కర్రీతో కలిపిన ఆవిరిలో ఉడికించిన అన్నం
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> పెరుగు అన్నం</span
+                  >
+                  <span class="item-price">₹100</span>
+                </div>
+                <div class="item-description">
+                  పెరుగు, కరివేపాకు మరియు ఆవాల గింజలతో కలిపిన అన్నం
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> నిమ్మ అన్నం</span
+                  >
+                  <span class="item-price">₹120</span>
+                </div>
+                <div class="item-description">
+                  పసుపు, వేరుశనగలు మరియు కరివేపాకుతో పులుపు అన్నం
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> కొబ్బరి అన్నం</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  తాజా కొబ్బరి మరియు మసాలాలతో సువాసనగల అన్నం
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> బిసిబేలే బాత్</span
+                  >
+                  <span class="item-price">₹160</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> కూరగాయలతో కారమైన అన్నం
+                  మరియు పప్పు వంటకం
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> చింతపండు అన్నం</span
+                  >
+                  <span class="item-price">₹125</span>
+                </div>
+                <div class="item-description">
+                  చింతపండు పేస్ట్ మరియు వేరుశనగలతో పులుపు అన్నం
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 చికెన్ బిర్యానీ</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  మృదువైన చికెన్ మరియు మసాలాలతో సువాసనగల బాస్మతి అన్నం
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 మటన్ బిర్యానీ</span>
+                  <span class="item-price">₹320</span>
+                </div>
+                <div class="item-description">
+                  కుంకుమపువ్వు మరియు వేయించిన ఉల్లిపాయలతో గొప్ప మటన్ బిర్యానీ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥘 కర్రీలు మరియు గ్రేవీలు</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> పప్పు తడ్కా</span
+                  >
+                  <span class="item-price">₹110</span>
+                </div>
+                <div class="item-description">
+                  జీలకర్ర మరియు వెల్లుల్లితో తాలింపు చేసిన పసుపు పప్పు
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> సాంబార్</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  కూరగాయలు మరియు చింతపండుతో సాంప్రదాయ పప్పు కర్రీ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> రసం</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  మసాలాలతో పులుపు టమాటా మరియు చింతపండు సూప్
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> అవియల్</span
+                  >
+                  <span class="item-price">₹130</span>
+                </div>
+                <div class="item-description">
+                  కొబ్బరి మరియు పెరుగు గ్రేవీలో మిశ్రమ కూరగాయలు
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 చికెన్ కర్రీ</span>
+                  <span class="item-price">₹220</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️</span> కొబ్బరి ఆధారిత
+                  గ్రేవీలో కారమైన చికెన్
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 చేప కర్రీ</span>
+                  <span class="item-price">₹250</span>
+                </div>
+                <div class="item-description">
+                  పులుపు కొబ్బరి కర్రీలో తాజా చేపలు
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 మటన్ కర్రీ</span>
+                  <span class="item-price">₹280</span>
+                </div>
+                <div class="item-description">
+                  <span class="spicy-indicator">🌶️🌶️</span> సాంప్రదాయ గ్రేవీలో
+                  గొప్ప మరియు కారమైన మటన్
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">🔴 రొయ్యల కర్రీ</span>
+                  <span class="item-price">₹270</span>
+                </div>
+                <div class="item-description">
+                  కొబ్బరి పాల కర్రీలో రసవంతమైన రొయ్యలు
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🥤 పానీయాలు</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ఫిల్టర్ కాఫీ</span
+                  >
+                  <span class="item-price">₹60</span>
+                </div>
+                <div class="item-description">
+                  పాలు మరియు చక్కెరతో సాంప్రదాయ దక్షిణ భారతీయ కాఫీ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> మసాలా చాయ్</span
+                  >
+                  <span class="item-price">₹40</span>
+                </div>
+                <div class="item-description">
+                  ఏలకులు, అల్లం మరియు దాల్చినచెక్కతో మసాలా టీ
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> తాజా నిమ్మ నీరు</span
+                  >
+                  <span class="item-price">₹50</span>
+                </div>
+                <div class="item-description">
+                  పుదీనాతో రిఫ్రెష్ చేసే నిమ్మరసం
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> మజ్జిగ</span
+                  >
+                  <span class="item-price">₹45</span>
+                </div>
+                <div class="item-description">
+                  కరివేపాకుతో మసాలా పెరుగు పానీయం
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> ఎలకరి</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  పెంకు నుండి నేరుగా తాజా కొబ్బరి నీరు
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> మామిడి లస్సీ</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">తీపి మామిడి పెరుగు పానీయం</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <div class="section-header">🍰 తీపి పదార్థాలు</div>
+          <div class="menu-grid">
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> పాయసం</span
+                  >
+                  <span class="item-price">₹90</span>
+                </div>
+                <div class="item-description">
+                  ఏలకులు మరియు గింజలతో సాంప్రదాయ అన్నం పుడింగ్
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> మైసూర్ పాక్</span
+                  >
+                  <span class="item-price">₹80</span>
+                </div>
+                <div class="item-description">
+                  శనగపిండితో గొప్ప నెయ్యి ఆధారిత తీపి
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> రవా కేసరీ</span
+                  >
+                  <span class="item-price">₹70</span>
+                </div>
+                <div class="item-description">
+                  కుంకుమపువ్వు మరియు జీడిపప్పుతో రవా పుడింగ్
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name"
+                    ><span class="veg-indicator">🟢</span> గులాబ్ జామున్</span
+                  >
+                  <span class="item-price">₹85</span>
+                </div>
+                <div class="item-description">
+                  గులాబీ రుచిగల సిరప్‌లో మృదువైన పాల డంప్లింగ్‌లు
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="contact-info">
+            <p>
+              <strong>📍 చిరునామా:</strong> 123 ఆలయ వీధి, గాంధీ నగర్, బెంగళూరు -
+              560001
+            </p>
+            <p>
+              <strong>📞 ఫోన్:</strong> +91 98765 43210 |
+              <strong>📧 ఇమెయిల్:</strong> info@spicegarden.com
+            </p>
+            <p>
+              <strong>🕒 సమయం:</strong> ఉదయం 7:00 - రాత్రి 11:00 |
+              <strong>🚗 ఉచిత ఇంటికి డెలివరీ</strong>
+            </p>
+            <p style="margin-top: 15px; font-style: italic">
+              🟢 శాకాహారం | 🔴 మాంసాహారం | 🌶️ మసాలా స్థాయి
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      function changeLanguage() {
+        const selectedLanguage =
+          document.getElementById("languageSelect").value;
+
+        // Hide all language content
+        const allLangContent = document.querySelectorAll(".lang-content");
+        allLangContent.forEach((content) => {
+          content.classList.remove("active");
+        });
+
+        // Show selected language content
+        const selectedContent = document.getElementById(
+          `content-${selectedLanguage}`
+        );
+        if (selectedContent) {
+          selectedContent.classList.add("active");
+        }
+
+        // Store language preference
+        localStorage.setItem("selectedLanguage", selectedLanguage);
+      }
+
+      // Load saved language preference on page load
+      window.addEventListener("DOMContentLoaded", function () {
+        const savedLanguage = localStorage.getItem("selectedLanguage");
+        if (savedLanguage) {
+          document.getElementById("languageSelect").value = savedLanguage;
+          changeLanguage();
+        }
+      });
+    </script>
+  </body>
 </html>
